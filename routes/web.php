@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProductoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +21,8 @@ Route::view('index', 'index');
 //permite designar todas las rutas (php artisan route:list)
 // ->middleware("auth") para restringir las rutas a usuarios autenticados
 Route::resource("alumnos", \App\Http\Controllers\AlumnoController::class)->middleware("auth");
+
+Route::resource("productos", ProductoController::class)->middleware("auth");
 
 Route::get('/', function () {
     return view('welcome');

@@ -19,7 +19,7 @@ class AlumnoController extends Controller
         // dd= var_dump
         //dd($alumnos);
         //invocamos una vista llamada alumnos a la que le pasamos un array (mysql_result) con tods los alumnos
-        return view("crud/alumnos", ["alumnos"=> $alumnos]);
+        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
     }
     /**
      * Show the form for creating a new resource.
@@ -28,7 +28,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return view("crud/create");
+        return view("crud_alumnos/create");
     }
 
     /**
@@ -46,7 +46,7 @@ class AlumnoController extends Controller
 
         // volvemos a cargar la vista con todos los alumnos y volvemos al index
         $alumnos = Alumno::all();
-        return view("crud/alumnos", ["alumnos"=> $alumnos]);
+        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
 
     }
 
@@ -69,7 +69,7 @@ class AlumnoController extends Controller
      */
     public function edit(Alumno $alumno)
     {
-        return view("crud/edit", ["alumno"=> $alumno]);
+        return view("crud_alumnos/edit", ["alumno"=> $alumno]);
     }
 
     /**
@@ -86,7 +86,7 @@ class AlumnoController extends Controller
         //actualizamos el alumno con los nuevos valores
         $alumno->update($valores);
         $alumnos = Alumno::all();
-        return view("crud/alumnos", ["alumnos"=> $alumnos]);
+        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
 
         // actualizamos el alumno con los datos del formulario
         //$alumno->update($request->input());
@@ -103,6 +103,6 @@ class AlumnoController extends Controller
     {
         $alumno->delete();
         $alumnos = Alumno::all();
-        return view("crud/alumnos", ["alumnos"=> $alumnos]);
+        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
     }
 }
