@@ -15,6 +15,8 @@ use App\Http\Controllers\ProductoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::view('vue', 'vue');
+
 Route::view('index', 'index');
 //Route::get("alumnos", [\App\Http\Controllers\AlumnoController::class, "index"]);
 

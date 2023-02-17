@@ -16,10 +16,27 @@ class AlumnoController extends Controller
     public function index()
     {
         $alumnos = Alumno::all();
+
+        // AYUDA PARA VER INFO EN CODIGO
+        $campos = $alumnos[0]->getAttributes();
+        $campos = array_keys($campos);
+
+        //info($campos);
+
+        // Y PASARLA A JSON
+        $campos = json_encode($campos);
+        $alumnos = json_encode($alumnos);
+
+
+
         // dd= var_dump
         //dd($alumnos);
         //invocamos una vista llamada alumnos a la que le pasamos un array (mysql_result) con tods los alumnos
-        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
+        //return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
+
+        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos, "campos"=> $campos,"nombre"=> "Alumnos"]);
+
+
     }
     /**
      * Show the form for creating a new resource.
@@ -44,9 +61,12 @@ class AlumnoController extends Controller
         // Guardamos
         $alumno->saveOrFail();
 
+        //Redirigimos a alumnos
+        return redirect(route("alumnos.index"));
+
         // volvemos a cargar la vista con todos los alumnos y volvemos al index
-        $alumnos = Alumno::all();
-        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
+        //$alumnos = Alumno::all();
+        //return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
 
     }
 
@@ -85,8 +105,12 @@ class AlumnoController extends Controller
         $valores = $request->input();
         //actualizamos el alumno con los nuevos valores
         $alumno->update($valores);
-        $alumnos = Alumno::all();
-        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
+
+        //Redirigimos a alumnos para que vuelva a cargar todos los alumnos con todos los campos
+        return redirect(route("alumnos.index"));
+
+        //$alumnos = Alumno::all();
+        //return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
 
         // actualizamos el alumno con los datos del formulario
         //$alumno->update($request->input());
@@ -103,6 +127,8 @@ class AlumnoController extends Controller
     {
         $alumno->delete();
         $alumnos = Alumno::all();
-        return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
+        //return view("crud_alumnos/alumnos", ["alumnos"=> $alumnos]);
+        // ahora solo necesito actualizar los datos del alumno actualizados
+        return ["alumnos"=> $alumnos];
     }
 }
